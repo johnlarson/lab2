@@ -1,8 +1,27 @@
 ruleset lab2 {
 	meta {
+		name "Lab 2"
+		description << Twilio client. >>
 		use module twilio_keys
 		use module twilio with
 			sid = keys:twilio{"sid"} and
 			auth_token = keys:twilio{"auth_token"}
+			provides __testing, message
+			shares __testing, message
+	}
+	global{
+	  __testing = {"events": [{"domain": "twilio", "type":"send",
+	                "attrs":["from", "to", "msg"]}]}
+	  
+	}
+
+	rule send_sms {
+		select when twilio send
+		pre {
+			from = event:attr("from")
+			to = event:attr("to")
+			msg = event:attr("msg").klog("here is msg")
+		}
+		twilio:send(to, from, msg)
 	}
 }
