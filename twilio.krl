@@ -18,5 +18,10 @@ ruleset twilio {
 					"Body":msg
 				})
 		}
+
+		messages = function() {
+			url = "http://www.imdb.com/";
+			http:get(url).klog()
+		}
 	}
 }

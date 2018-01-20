@@ -14,8 +14,14 @@ ruleset lab2 {
 		__testing = {
 			"events": [
 				{
-					"domain": "twilio", "type":"send",
+					"domain": "twilio",
+					"type":"send",
 					"attrs": ["from", "to", "msg"]
+				},
+				{
+					"domain": "twilio",
+					"type": "messages",
+					"attrs": []
 				}
 			]
 		}
@@ -30,5 +36,13 @@ ruleset lab2 {
 			msg = event:attr("msg")
 		}
 		twilio:send(to, from, msg)
+	}
+
+	rule get_messages {
+		select when twilio messages
+		pre {
+
+		}
+		send_directive("messages", {})
 	}
 }
