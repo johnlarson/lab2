@@ -20,9 +20,8 @@ ruleset twilio {
 		}
 
 		messages = function() {
-			url = "http://www.imdb.com/";
-			g = http:get(url).klog();
-			url
+			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json/>>;
+			http:get(url)
 		}
 	}
 }
