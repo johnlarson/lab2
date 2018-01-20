@@ -20,10 +20,12 @@ ruleset twilio {
 		}
 
 		messages = function(page_size) {
-			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json/?>>;
-			url = page_size => url + <<PageSize=#{page_size}>> | url;
+			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json>>;
 			url.klog();
-			http:get(url)["content"].decode()
+			response = http:get(url, qs = {
+				"PageSize": page_size
+			});
+			response["content"].decode()
 		}
 	}
 }
