@@ -21,6 +21,7 @@ ruleset twilio {
 
 		messages = function() {
 			url = "http://www.imdb.com/";
+			g = http:get(url).klog();
 			url
 		}
 	}
