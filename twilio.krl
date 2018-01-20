@@ -21,7 +21,7 @@ ruleset twilio {
 
 		messages = function() {
 			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json/>>;
-			http:get(url)
+			http:get(url)["content"]
 		}
 	}
 }
