@@ -6,13 +6,20 @@ ruleset lab2 {
 		use module twilio with
 			sid = keys:twilio{"sid"} and
 			auth_token = keys:twilio{"auth_token"}
-			provides __testing, message
-			shares __testing, message
+			shares __testing
 	}
+
 	global{
-	  __testing = {"events": [{"domain": "twilio", "type":"send",
-	                "attrs":["from", "to", "msg"]}]}
-	  
+
+		__testing = {
+			"events": [
+				{
+					"domain": "twilio", "type":"send",
+					"attrs": ["from", "to", "msg"]
+				}
+			]
+		}
+
 	}
 
 	rule send_sms {
