@@ -27,7 +27,7 @@ ruleset lab2 {
 		pre {
 			from = event:attr("from")
 			to = event:attr("to")
-			msg = event:attr("msg").klog("here is msg")
+			msg = event:attr("msg")
 		}
 		twilio:send(to, from, msg)
 	}
