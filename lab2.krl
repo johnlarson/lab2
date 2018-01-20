@@ -43,6 +43,6 @@ ruleset lab2 {
 		pre {
 
 		}
-		send_directive("messages", {})
+		send_directive("messages", {"messages": twilio:messages()})
 	}
 }

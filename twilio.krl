@@ -5,7 +5,7 @@ ruleset twilio {
 		configure using sid = ""
 		                auth_token = ""
 		provides
-			send
+			send, messages
 	}
 
 	global {
@@ -21,7 +21,7 @@ ruleset twilio {
 
 		messages = function() {
 			url = "http://www.imdb.com/";
-			http:get(url).klog()
+			url
 		}
 	}
 }
