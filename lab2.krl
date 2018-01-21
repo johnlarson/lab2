@@ -21,9 +21,7 @@ ruleset lab2 {
 				{
 					"domain": "twilio",
 					"type": "messages",
-					"attrs": [
-						"page_size"
-					]
+					"attrs": []
 				}
 			]
 		}
@@ -43,8 +41,7 @@ ruleset lab2 {
 	rule get_messages {
 		select when twilio messages
 		pre {
-			page_size = event:attr("page_size")
-			msgs = twilio:messages(page_size)
+			msgs = twilio:messages(page_size = 1000)
 		}
 		send_directive("messages", msgs)
 	}

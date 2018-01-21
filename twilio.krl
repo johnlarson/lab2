@@ -19,7 +19,7 @@ ruleset twilio {
 				})
 		}
 
-		messages = function(page_size) {
+		messages = function(page_size, page) {
 			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json>>;
 			url.klog();
 			response = http:get(url, qs = {
