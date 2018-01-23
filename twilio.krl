@@ -19,12 +19,18 @@ ruleset twilio {
 				})
 		}
 
-		messages = function(page_size, page) {
+		messages = function(page_size, to, from) {
+			a=page_size.klog();
+			a=to.klog();
+			a=from.klog();
 			url = <<https://#{sid}:#{auth_token}@api.twilio.com/2010-04-01/Accounts/#{sid}/Messages.json>>;
 			url.klog();
-			response = http:get(url, qs = {
-				"PageSize": page_size
-			});
+			q = {};
+			q = page_size => q.put({"PageSize": page_size}) | q;
+			q = to => q.put({"To": to}) | q;
+			q = from => q.put({"From": from}) | q;
+			a=q.klog();
+			response = http:get(url, qs = q);
 			response["content"].decode()
 		}
 	}
